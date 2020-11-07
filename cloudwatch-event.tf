@@ -3,24 +3,7 @@ resource "aws_cloudwatch_event_rule" "ecs_taskstopped_rule" {
   name        = "ecs_taskstopped_rule"
   description = "Event rule to capture ecs stops task in API cluster"
 
-  event_pattern = <<PATTERN
-{
-  "source": [
-    "aws.ecs"
-  ],
-  "detail-type": [
-    "ECS Task State Change"
-  ],
-  "detail": {
-    "clusterArn": ${var.ecs_clusters_arn},
-    "lastStatus": [
-      "STOPPED",
-      "RUNNING"
-    ]
-  }
-}
-PATTERN
-
+  event_pattern = var.event_pattern
 }
 
 resource "aws_cloudwatch_event_target" "ecs_taskstopped_target" {

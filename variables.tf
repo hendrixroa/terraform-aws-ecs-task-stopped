@@ -28,6 +28,8 @@ variable "enabled" {
   default = 1
 }
 
-variable "ecs_clusters_arn" {
-  default = []
+variable "event_pattern" {}
+
+variable "code_source" {
+  default = "src"
 }
