@@ -4,7 +4,7 @@ module "lambda_ecs_task_stopped" {
   code_location        = "${path.module}/${var.code_source}"
   filename             = "ecsTaskStopped.zip"
   lambda_iam_role      = aws_iam_role.lambda_alerting_role.arn
-  lambda_function_name = "EcsTaskStopped"
+  lambda_function_name = var.name
   lambda_runtime       = var.runtime
   timeout              = var.timeout
   memory               = var.memory
