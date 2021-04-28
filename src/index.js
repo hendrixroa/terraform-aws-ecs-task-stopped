@@ -9,6 +9,7 @@ const slackInfraAlertBot = ENV.slack_infra_alert_bot;
 const redis_url = ENV.redis_url;
 const redisConn = new Redis(6379, redis_url);
 const nameChannel = ENV.name_channel;
+const silent = ENV.silent ? false : true;
 
 FunctionShield.configure(
     {
@@ -24,6 +25,10 @@ FunctionShield.configure(
 
 exports.handler = async (event, context) => {
     context.callbackWaitsForEmptyEventLoop = false;
+    
+    if(silent) {
+        return context.succeed();
+    }
 
     const dataJSON = JSON.parse(JSON.stringify(event));
     const stageObj = await getStageSlack();
